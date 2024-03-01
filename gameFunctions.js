@@ -9,7 +9,7 @@ const initialize = (gio, gsocket) => {
     gsocket.on("test", () => test())
 
     // New move -> send to opponent
-    gsocket.on("newMove", newMove)
+    gsocket.on("newMove", (data) => newMove(gsocket, data))
 
     // Create new game room
     gsocket.on("createGame", (data) => createGame(data, gsocket))
@@ -47,9 +47,9 @@ const test = () => {
     console.log("TESTED");
 }
 
-const newMove = (move) => {
+const newMove = (socket, move) => {
     console.log("NEW MOVE", move)
-    io.sockets.in(move.id).emit("opponentMove", move)
+    socket.to(move.id).emit("opponentMove", move)
 }
 
 const createGame = (data, socket) => {
@@ -92,7 +92,6 @@ const disconnect = (socket) => {
         for (let i = 0; i < room.length; i++) {
             const user = room[i]
             if (user.id === socket.id) {
-
                 id = gameId;
                 index = i;
             }
