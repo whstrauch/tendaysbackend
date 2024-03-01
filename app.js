@@ -8,7 +8,7 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
-      origin: "http://localhost:3000"
+      origin: "https://tendays-a1e2d.web.app/"
     }
   });
 
@@ -21,4 +21,4 @@ io.on("connection", (socket) => {
     initialize(io, socket);
 });
 
-httpServer.listen(8000, () => console.log("Server running on port 8000..."));
+httpServer.listen(process.env.PORT || 8000, () => console.log("Server running on port 8000..."));
