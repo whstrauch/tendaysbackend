@@ -4,11 +4,14 @@ import { Server } from "socket.io";
 import cors from 'cors';
 import { initialize } from "./gameFunctions.js";
 
+const local = "http://localhost:3000"
+const publicURL = "https://tendays-a1e2d.web.app"
+
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
-      origin: "http://localhost:3000"
+      origin: publicURL
     }
   });
 
