@@ -11,7 +11,7 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
-      origin: publicURL
+      origin: local
     }
   });
 
